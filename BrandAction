@@ -98,7 +98,7 @@ public class BrandAction extends BaseAction {
 				}
 				File destThumbnail = new File(absoluteThumbnailUrl);
 				copyByChannel(imageFile, destFile);
-				ImageUtils.createResizedImage(imageFile, destThumbnail, 100, 100, 0.5f);
+				ImageUtils.createResizedImage(imageFile, destThumbnail, System.getProperty("thumbnail.size.width"), System.getProperty("thumbnail.size.height"),Float.valueOf( System.getProperty("thumbnail.size.quality")));
 			}
 			getValueStack()
 					.set("msg",
