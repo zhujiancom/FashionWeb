@@ -173,7 +173,12 @@ public class CommonServiceImpl implements ICommonService{
 	}
 	@Override
 	public <T> List<T> getAll(Class<T> clazz) throws ServiceException{
-		return dao.getAll(clazz);
+		try{
+			return dao.getAll(clazz);	
+		}catch(DAOException daoEx){
+			throw new ServiceException("access database error!",daoEx);	
+		}
+		
 	}
 	/**
 	 * 唯一性验证
