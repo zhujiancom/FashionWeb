@@ -287,6 +287,7 @@ public class Brand extends AbstractEntity implements Serializable {
 		this.officialwebsite = officialwebsite;
 	}
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name = "DESIGNER_ID",referencedColumnName="DESIGNER_ID")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonData(type=GlobalParam.JSONTYPE_REFERENCE)
