@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class ContextAction {
     public static void execute(){
-        String lang = "en_US";
+        String lang = "zh_TW";
         LanguageType type = LanguageType.toLanguageType(lang.toUpperCase());
         Language language = Language.getInstance();
         Designer designer = new Designer(1,"designer1","设计师1");
@@ -19,15 +19,19 @@ public class ContextAction {
         brands.add(brand1);
         brands.add(brand2);
         designer.setBrands(brands);
-        DesignerVO dvo = new DesignerVO(designer);
+//        DesignerVO dvo = new DesignerVO(designer);
+        DesignerVO dvo = VOFactory.getObserverVO(DesignerVO.class, designer);
         language.addObserver(dvo);
         List<BrandVO> bvos = new LinkedList<BrandVO>();
         for(Brand brand:brands){
-            BrandVO bvo = new BrandVO(brand);
+//            BrandVO bvo = new BrandVO(brand);
+            BrandVO bvo = VOFactory.getObserverVO(BrandVO.class, brand);
             bvos.add(bvo);
             language.addObserver(bvo);
         }
-        language.addObserver(new MenuVO());
+        MenuVO menuvo = VOFactory.getObserverVO(MenuVO.class);
+//        MenuVO menuvo = new MenuVO();
+        language.addObserver(menuvo);
         language.setLanguage(type);
         IMenuBuilder builder = new DesignerMenuBuilder(dvo, bvos,true);
         List<Menu> menuTree = builder.createMenuTree();
