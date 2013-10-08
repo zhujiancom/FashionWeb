@@ -1,0 +1,58 @@
+package com;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+public class ContextAction {
+    public static void execute(){
+        String lang = "zh_TW";
+        LanguageType type = LanguageType.toLanguageType(lang.toUpperCase());
+        Language language = Language.getInstance();
+        Designer designer = new Designer(1,"designer1","设计师1");
+        Brand brand1 = new Brand(1,"brand1","品牌1");
+        brand1.setDesigner(designer);
+        Brand brand2 = new Brand(2,"brand2","品牌2");
+        brand2.setDesigner(designer);
+        Set<Brand> brands = new HashSet<Brand>();
+        brands.add(brand1);
+        brands.add(brand2);
+        designer.setBrands(brands);
+        DesignerVO dvo = new DesignerVO(designer);
+        language.addObserver(dvo);
+        List<BrandVO> bvos = new LinkedList<BrandVO>();
+        for(Brand brand:brands){
+            BrandVO bvo = new BrandVO(brand);
+            bvos.add(bvo);
+            language.addObserver(bvo);
+        }
+        language.setLanguage(type);
+        IMenuBuilder builder = new DesignerMenuBuilder(dvo, bvos,true);
+        List<Menu> menuTree = builder.createMenuTree();
+        System.out.println(menuTree);
+    }
+    
+    public static void execute2(){
+        String lang = "zh_TW";
+        LanguageType type = LanguageType.toLanguageType(lang.toUpperCase());
+        Language language = Language.getInstance();
+        Designer designer = new Designer(1,"designer1","设计师A");
+        Brand brand = new Brand(1,"brand1","品牌A");
+        brand.setDesigner(designer);
+        DesignerVO dvo = new DesignerVO(designer);
+        BrandVO bvo = new BrandVO(brand);
+        language.addObserver(bvo);
+        language.addObserver(dvo);
+        language.setLanguage(type);
+        IMenuBuilder builder = new BrandMenuBuilder(bvo, dvo, true);
+        List<Menu> menuTree = builder.createMenuTree();
+        System.out.println(menuTree);
+    }
+    
+    public static void main(String[] args){
+        execute();
+        System.out.println();
+        execute2();
+    }
+}
