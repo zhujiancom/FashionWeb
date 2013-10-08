@@ -1,0 +1,73 @@
+package com;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+public class DesignerVO extends AbstractVO implements ObserverVO{
+    private Designer designer;
+    private String name;
+    private long id;
+    
+    public DesignerVO() {
+        super();
+    }
+
+    public DesignerVO(Designer designer) {
+        super();
+        this.designer = designer;
+    }
+
+    @Override
+    public void process(LanguageType language) {
+        if(designer.getId() != 0){
+            setId(designer.getId());
+        }
+        if(LanguageType.EN_US.equals(language)){
+                setEnglishValue();
+        }else{
+                setChineseValue(language);
+        }
+    }
+    
+    private void setEnglishValue(){
+            setName(designer.getName());
+    }
+    
+    private void setChineseValue(LanguageType language){
+            setName(convertTCSC(designer.getCname(),language));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public Designer getDesigner() {
+        return designer;
+    }
+
+
+    public void setDesigner(Designer designer) {
+        this.designer = designer;
+    }
+    
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+}
