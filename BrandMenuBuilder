@@ -1,0 +1,133 @@
+package com;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class BrandMenuBuilder implements IMenuBuilder {
+    private BrandVO brand;
+    private DesignerVO designer;
+    private boolean isPermission;
+    
+    public BrandMenuBuilder(BrandVO brand, DesignerVO designer) {
+        super();
+        this.brand = brand;
+        this.designer = designer;
+    }
+
+    public BrandMenuBuilder(BrandVO brand, DesignerVO designer, boolean isPermission) {
+        super();
+        this.brand = brand;
+        this.designer = designer;
+        this.isPermission = isPermission;
+    }
+
+    public Menu createBrandMenu() {
+        Menu menu = new Menu(brand.getName().toUpperCase());
+        String attributes = "href='brand_showBrandInfo.action?brand.brandid="
+                        + brand.getId() + "' target=mainPanel";
+        menu.setAttributes(attributes);
+        return menu;
+    }
+    
+    public Menu createDesignerMenu(){
+        Menu menu = new Menu(UNKNOW);
+        if (designer != null) {
+                menu = new Menu(designer.getName().toUpperCase());
+                String attributes = "href='designer_showProfile.action?designer.designerId="
+                                + designer.getId()
+                                + "' target='mainPanel'";
+                menu.setAttributes(attributes);
+        }
+        return menu;
+    }
+    
+    public Menu createInterviewMenu() {
+        Menu menu = new Menu(INTERVIEWS);
+        MenuItem videoItem = new MenuItem(VIDEOS);
+        MenuItem audioItem = new MenuItem(AUDIOS);
+        MenuItem pressreportItem = new MenuItem(PRESSROPORTS);
+        if (designer != null) {
+                String videoAttr = "href='interview_showInterviews.action?designer.designerId="
+                                + designer.getId()
+                                + "&type=video' target='mainPanel'";
+                videoItem.setAttributes(videoAttr);
+                String audioAttr = "href='interview_showInterviews.action?designer.designerId="
+                                + designer.getId()
+                                + "&type=audio' target='mainPanel'";
+                audioItem.setAttributes(audioAttr);
+                String reportAttr = "href='report_showReports.action?designer.designerId="
+                                + designer.getId()
+                                + "' target='mainPanel'";
+                pressreportItem.setAttributes(reportAttr);
+        }
+        menu.addMenuItem(videoItem);
+        menu.addMenuItem(audioItem);
+        menu.addMenuItem(pressreportItem);
+        return menu;
+    }
+    
+    public Menu createCollectionMenu() {
+        Menu menu = new Menu(COLLECTIONS);
+        // lookbook Item
+        MenuItem lookbookItem = new MenuItem(LOOKBOOK_IMAGES);
+        // editorial Item
+        MenuItem editorialItem = new MenuItem(EDITORIAL_IMAGES);
+        // runway shows Item
+        MenuItem runwayshowItem = new MenuItem(RUNWAY_SHOWS);
+        if(brand != null){
+            String lookbookAttr = "href='lookbook_showByBrand.action?brand.brandid="
+                    + brand.getBrand().getId() + "'";
+            lookbookItem.setAttributes(lookbookAttr);
+            String editorialAttr = "href='editorial_showByBrand.action?brand.brandid="
+                    + brand.getBrand().getId() + "'";
+            editorialItem.setAttributes(editorialAttr);
+            String runwayshowAttr = "href='runwayshow_showByBrand.action?brand.brandid="
+                    + brand.getBrand().getId() + "'";
+            runwayshowItem.setAttributes(runwayshowAttr);
+        }
+        
+        menu.addMenuItem(lookbookItem);
+        menu.addMenuItem(editorialItem);
+        menu.addMenuItem(runwayshowItem);
+        return menu;
+    }
+    
+    @Override
+    public List<Menu> createMenuTree() {
+        List<Menu> menuTree = new LinkedList<Menu>();
+        menuTree.add(createBrandMenu());
+        menuTree.add(createDesignerMenu());
+        if(isPermission){
+            menuTree.add(createInterviewMenu());
+            menuTree.add(createCollectionMenu());
+        }
+        return menuTree;
+    }
+
+    public BrandVO getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandVO brand) {
+        this.brand = brand;
+    }
+
+    public DesignerVO getDesigner() {
+        return designer;
+    }
+
+    public void setDesigner(DesignerVO designer) {
+        this.designer = designer;
+    }
+
+    public boolean isPermission() {
+        return isPermission;
+    }
+
+    public void setPermission(boolean isPermission) {
+        this.isPermission = isPermission;
+    }
+    
+    
+
+}
