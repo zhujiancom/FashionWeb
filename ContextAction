@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class ContextAction {
     public static void execute(){
-        String lang = "zh_TW";
+        String lang = "en_US";
         LanguageType type = LanguageType.toLanguageType(lang.toUpperCase());
         Language language = Language.getInstance();
         Designer designer = new Designer(1,"designer1","设计师1");
@@ -27,6 +27,7 @@ public class ContextAction {
             bvos.add(bvo);
             language.addObserver(bvo);
         }
+        language.addObserver(new MenuVO());
         language.setLanguage(type);
         IMenuBuilder builder = new DesignerMenuBuilder(dvo, bvos,true);
         List<Menu> menuTree = builder.createMenuTree();
@@ -45,6 +46,7 @@ public class ContextAction {
         language.addObserver(bvo);
         language.addObserver(dvo);
         language.setLanguage(type);
+        language.addObserver(new MenuVO());
         IMenuBuilder builder = new BrandMenuBuilder(bvo, dvo, true);
         List<Menu> menuTree = builder.createMenuTree();
         System.out.println(menuTree);
@@ -53,6 +55,6 @@ public class ContextAction {
     public static void main(String[] args){
         execute();
         System.out.println();
-        execute2();
+//        execute2();
     }
 }
