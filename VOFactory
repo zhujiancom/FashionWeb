@@ -4,11 +4,16 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class VOFactory {
-    public static <T> T getObserverVO(Class<T> clazz,Object...param){
+    @SuppressWarnings("rawtypes")
+    public static <T> T getObserverVO(Class<T> clazz,Object...params){
         try {
-            if(param.length > 0){
-                Constructor<T> c = clazz.getConstructor(param[0].getClass());
-                return c.newInstance(param);
+            if(params.length > 0){
+                Class[] paramTypes = new Class[params.length];
+                for(int i=0;i<params.length;i++){
+                    paramTypes[i] = params[i].getClass();
+                }
+                Constructor<T> c = clazz.getConstructor(paramTypes);
+                return c.newInstance(params);
             }else{
                 Constructor<T> c = clazz.getConstructor();
                 return c.newInstance();
