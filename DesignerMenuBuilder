@@ -1,0 +1,126 @@
+package com;
+
+import java.util.LinkedList;
+import java.util.List;
+
+
+public class DesignerMenuBuilder implements IMenuBuilder {
+    private DesignerVO designer;
+    private List<BrandVO> brands;
+    private boolean isPermission;
+    
+    public DesignerMenuBuilder(DesignerVO designer, List<BrandVO> brands) {
+        super();
+        this.designer = designer;
+        this.brands = brands;
+    }
+
+    public DesignerMenuBuilder(DesignerVO designer, List<BrandVO> brands, boolean isPermission) {
+        super();
+        this.designer = designer;
+        this.brands = brands;
+        this.isPermission = isPermission;
+    }
+    
+    public Menu createDesingerMenu(){
+        Menu menu = new Menu(designer.getName().toUpperCase());
+        String attributes = "href='designer_showProfile.action?designer.designerId="+ designer.getDesigner().getId()+ "' target='mainPanel'";
+        menu.setAttributes(attributes);
+        return menu;
+    }
+
+    public Menu createBrandsMenu(){
+        Menu menu = new Menu(BRAND);
+        for(BrandVO brand:brands){
+            MenuItem item = new MenuItem(brand.getName().toUpperCase());
+            String attributes = "href='brand_showBrandInfo.action?brand.brandid="+brand.getBrand().getId()+"' target='mainPanel'";
+            item.setAttributes(attributes);
+            menu.addMenuItem(item);
+        }
+        return menu;
+    }
+    
+    public Menu createInterviewMenu(){
+        Menu menu = new Menu(INTERVIEWS);
+        MenuItem videoItem = new MenuItem(VIDEOS);
+        String videoAttr = "href='interview_showInterviews.action?designer.designerId="+designer.getDesigner().getId()+"&type=video' target='mainPanel'";
+        videoItem.setAttributes(videoAttr);
+        menu.addMenuItem(videoItem);
+        MenuItem audioItem = new MenuItem(AUDIOS);
+        String audioAttr = "href='interview_showInterviews.action?designer.designerId="+designer.getDesigner().getId()+"&type=audio' target='mainPanel'";
+        audioItem.setAttributes(audioAttr);
+        menu.addMenuItem(audioItem);
+        MenuItem pressreportItem = new MenuItem(PRESSROPORTS);
+        String reportAttr="href='report_showReports.action?designer.designerId="+designer.getDesigner().getId()+"' target='mainPanel'";
+        pressreportItem.setAttributes(reportAttr);
+        menu.addMenuItem(pressreportItem);
+        return menu;
+    }
+    
+    public Menu createCollectionMenu() {
+        Menu menu = new Menu(COLLECTIONS);
+        for(BrandVO brandvo:brands){
+                Menu subMenu = new Menu(brandvo.getName().toUpperCase());
+                //lookbook Item
+                MenuItem lookbookItem = new MenuItem(LOOKBOOK_IMAGES);
+                String lookbookAttr="href='lookbook_showByBrand.action?brand.brandid="+brandvo.getBrand().getId()+"'";
+                lookbookItem.setAttributes(lookbookAttr);
+                subMenu.addMenuItem(lookbookItem);
+                //editorial Item
+                MenuItem editorialItem = new MenuItem(EDITORIAL_IMAGES);
+                String editorialAttr="href='editorial_showByBrand.action?brand.brandid="+brandvo.getBrand().getId()+"'";
+                editorialItem.setAttributes(editorialAttr);
+                subMenu.addMenuItem(editorialItem);
+                //runway shows Item
+                MenuItem runwayshowItem = new MenuItem(RUNWAY_SHOWS);
+                String runwayshowAttr="href='runwayshow_showByBrand.action?brand.brandid="+brandvo.getBrand().getId()+"'";
+                runwayshowItem.setAttributes(runwayshowAttr);
+                subMenu.addMenuItem(runwayshowItem);
+                menu.addSubMenu(subMenu);
+        }
+        return menu;
+}
+    
+    @Override
+    public List<Menu> createMenuTree() {
+        List<Menu> menuTree = new LinkedList<Menu>();
+        menuTree.add(createDesingerMenu());
+        menuTree.add(createBrandsMenu());
+        if(isPermission){
+            menuTree.add(createInterviewMenu());
+            menuTree.add(createCollectionMenu());
+        }
+        return menuTree;
+    }
+
+
+    public DesignerVO getDesigner() {
+        return designer;
+    }
+
+
+    public void setDesigner(DesignerVO designer) {
+        this.designer = designer;
+    }
+
+
+    public List<BrandVO> getBrands() {
+        return brands;
+    }
+
+
+    public void setBrands(List<BrandVO> brands) {
+        this.brands = brands;
+    }
+
+
+    public boolean isPermission() {
+        return isPermission;
+    }
+
+
+    public void setPermission(boolean isPermission) {
+        this.isPermission = isPermission;
+    }
+    
+}
