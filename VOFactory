@@ -1,0 +1,38 @@
+package com;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+public class VOFactory {
+    public static <T> T getObserverVO(Class<T> clazz,Object...param){
+        try {
+            if(param.length > 0){
+                Constructor<T> c = clazz.getConstructor(param[0].getClass());
+                return c.newInstance(param);
+            }else{
+                Constructor<T> c = clazz.getConstructor();
+                return c.newInstance();
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        } catch(Exception e){
+            throw new RuntimeException();
+        }
+    }
+}
