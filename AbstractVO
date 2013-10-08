@@ -1,5 +1,9 @@
 package com;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.apache.commons.lang.StringUtils;
 
 public abstract class AbstractVO{
@@ -40,6 +44,17 @@ public abstract class AbstractVO{
         }
 
         return result.toString();
+    }
+    
+    public void convertTCSC(Map<String,String> src,LanguageType language){
+        if(src != null && src.isEmpty()){
+            for(Iterator<Entry<String,String>> it=src.entrySet().iterator();it.hasNext();){
+                Entry<String,String> entry = it.next();
+                String value = entry.getValue();
+                value = convertTCSC(value,language);
+                entry.setValue(value);
+            }
+        }
     }
     
     protected String generateThumbnailUrl(String sourceUrl){
