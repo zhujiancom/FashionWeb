@@ -24,3 +24,30 @@ favicon :
       image2icon
 log4j.appender.TextProcessor.Threshold=debug
 log4j.appender.A1.ImmediateFlush=true|false     默认为true    【表所有的信息都会立即示输出】
+
+发送email通知管理员：
+ 1. 首先下载JavaMail和JAF, 
+  http://java.sun.com/j2ee/ja/javamail/index.html
+  http://java.sun.com/beans/glasgow/jaf.html
+ 在项目中引用mail.jar和activation.jar。
+ 2. 写配置文件
+ # 将日志发送到email
+Properties代码  
+log4j.logger.MailLog=WARN,A5  
+#  APPENDER A5  
+log4j.appender.A5=org.apache.log4j.net.SMTPAppender  
+log4j.appender.A5.BufferSize=5  
+log4j.appender.A5.To=chunjie@yeqiangwei.com  
+log4j.appender.A5.From=error@yeqiangwei.com  
+log4j.appender.A5.Subject=ErrorLog  
+log4j.appender.A5.SMTPHost=smtp.263.net  
+log4j.appender.A5.layout=org.apache.log4j.PatternLayout  
+log4j.appender.A5.layout.ConversionPattern=%-4r %-5p [%t] %37c %3x - %m%n  
+ 
+ 3.调用代码：
+Java代码  
+//把日志发送到mail  
+Logger logger3 = Logger.getLogger("MailLog");  
+logger3.warn("warn!!!");  
+logger3.error("error!!!");  
+logger3.fatal("fatal!!!");  
