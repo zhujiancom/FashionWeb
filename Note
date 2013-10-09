@@ -23,3 +23,4 @@ favicon :
       
       image2icon
 log4j.appender.TextProcessor.Threshold=debug
+log4j.appender.A1.ImmediateFlush=true|false     默认为true    【表所有的信息都会立即示输出】
