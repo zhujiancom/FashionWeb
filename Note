@@ -22,3 +22,4 @@ favicon :
       href="http://example.com/myicon.png">
       
       image2icon
+log4j.appender.TextProcessor.Threshold=debug
