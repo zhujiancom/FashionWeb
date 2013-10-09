@@ -14,3 +14,11 @@ JAVA_OPTS="-server -Xms800m -Xmx800m   -XX:MaxNewSize=256m"
 三、实例，以下给出1G内存环境下java jvm 的参数设置参考：
 
 JAVA_OPTS="-server -Xms800m -Xmx800m  -XX:PermSize=64M -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true "
+
+favicon :
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" 
+      type="image/png" 
+      href="http://example.com/myicon.png">
+      
+      image2icon
