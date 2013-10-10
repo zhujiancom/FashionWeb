@@ -65,3 +65,4 @@ logger3.fatal("fatal!!!");
 	<version>1.0.2</version>
 </dependency>
             
+   org.apache.commons.logging         protected final Log logger = LogFactory.getLog(getClass());
