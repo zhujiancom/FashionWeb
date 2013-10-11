@@ -66,3 +66,53 @@ logger3.fatal("fatal!!!");
 </dependency>
             
    org.apache.commons.logging         protected final Log logger = LogFactory.getLog(getClass());
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  ＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃3 
+   
+   <bean id="testConfig"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:environment.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="testConfig" />
+    </bean> 
+    
+    
+    
+    
+     @Value("#{testConfig['cache.path']}")
+    private String cacheDiskStorePath;
+    
+    
+    @Autowired(required=true)
+    public EHCacheService(@Qualifier("cacheDiskStorePath2") String cacheDiskStorePath) {
+        this.path2 = cacheDiskStorePath;
+    }
+    
+   ＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃3  
+    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
