@@ -111,6 +111,9 @@ String path = request.getContextPath();
 String serverPath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/";
 String basePath = serverPath+path+"/";
 %>
+
+
+<baseURL>/upload/ckfinder/</baseURL>
 -----------------------------------------------------------
    
    
