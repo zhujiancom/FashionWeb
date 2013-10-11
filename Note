@@ -105,7 +105,13 @@ logger3.fatal("fatal!!!");
    ＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃＃3  
     
    
-   
+   -----------------------------------------------------------
+   <%
+String path = request.getContextPath();
+String serverPath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+"/";
+String basePath = serverPath+path+"/";
+%>
+-----------------------------------------------------------
    
    
    
