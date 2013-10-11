@@ -114,6 +114,8 @@ String basePath = serverPath+path+"/";
 
 
 <baseURL>/upload/ckfinder/</baseURL>
+
+getBasePath()
 -----------------------------------------------------------
    
    
