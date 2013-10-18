@@ -124,6 +124,8 @@ struts 验证码
    
  hiberate ： list()、iterate()或filter()方法时
    
+ 
+ 使用  File.separator
    
    
    
