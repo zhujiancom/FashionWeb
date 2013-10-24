@@ -129,7 +129,15 @@ struts 验证码
  
  写触发器:
    
-   
+ 主页加载后下载js文件。
+ elem = document.createElement("script");
+ document.body.appendChild(elem);
+ 
+ elem = document.createElement("link");
+ elem.rel="stylesheet"
+ elem.type="text/css"
+ elem.href="";
+ document.body.appendChild(elem);
    
    
    
