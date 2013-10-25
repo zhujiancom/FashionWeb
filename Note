@@ -140,4 +140,10 @@ struts 验证码
  document.body.appendChild(elem);
    
    
+##################################
+<to type="forward" qsappend="true" context="appname">/$1?delay=1</to>
+
+http://urlrewritefilter.googlecode.com/svn/trunk/src/doc/manual/4.0/urlrewrite.xml
+http://tuckey.org/urlrewrite/
+   
    
