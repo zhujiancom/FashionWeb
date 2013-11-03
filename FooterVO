@@ -1,0 +1,51 @@
+package com.v2.vo;
+
+import java.util.List;
+import java.util.Map;
+
+import com.v2.observer.LanguageType;
+import com.v2.po.FooterPO;
+
+public class FooterVO extends AbstractVO{
+    private FooterPO po;
+    private String legalstmt;
+    private String aboutus;
+    private List<Map<String,String>> links;
+
+    @Override
+    protected void setEnglishValue() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void setChineseValue(LanguageType language) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public String getLegalstmt() {
+        return legalstmt;
+    }
+
+    public void setLegalstmt(String legalstmt) {
+        this.legalstmt = legalstmt;
+    }
+
+    public String getAboutus() {
+        return aboutus;
+    }
+
+    public void setAboutus(String aboutus) {
+        this.aboutus = aboutus;
+    }
+
+    public List<Map<String, String>> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Map<String, String>> links) {
+        this.links = links;
+    }
+
+}
