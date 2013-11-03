@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<footer xmlns="http://www.fashion.com/footer" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.fashion.com/footer footer.xsd">
+	<aboutus>
+		<en>About US</en>
+		<ch>关于我们</ch>
+	</aboutus>
+	<legalstmt>
+		<en>LegalStatement</en>
+		<ch>法律声明</ch>
+	</legalstmt>
+	<links>
+		<link href="http://www.baidu.com">
+			<en>Baidu</en>
+			<ch>百度</ch>
+		</link>
+		<link href="http://www.google.com">
+			<en>Google</en>
+			<ch>谷歌</ch>
+		</link>
+	</links>
+	<sitemap-url href="">
+		<en>Site Map</en>
+		<ch>网站地图</ch>
+	</sitemap-url>
+</footer>
