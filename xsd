@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+xmlns="http://www.fashion.com/footer"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.fashion.com/footer"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[
+			Footer bar Item information
+		]]></xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="footer">
+		<xsd:complexType>
+			<xsd:sequence >
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+						AboutUs item
+					]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="aboutus" type="LanguageType"/>
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+						LegalStatement item
+					]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="legalstmt" type="LanguageType"/>
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+						Links item
+					]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:element name="links">
+					<xsd:complexType>
+						<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+							<xsd:annotation>
+								<xsd:documentation><![CDATA[
+									Link item (optinal)
+								]]></xsd:documentation>
+							</xsd:annotation>
+							<xsd:element name="link">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="en" type="xsd:string"/>
+										<xsd:element name="ch" type="xsd:string"/>
+									</xsd:sequence>
+									<xsd:attribute name="href" type="xsd:string"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="sitemap-url" fixed="Site Map">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="en" type="xsd:string"/>
+							<xsd:element name="ch" type="xsd:string"/>
+						</xsd:sequence>
+						<xsd:attribute name="href" type="xsd:string"/>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[
+			Language Type , EN or CH
+		]]></xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="LanguageType">
+		<xsd:sequence>
+			<xsd:element name="en" type="xsd:string"/>
+			<xsd:element name="ch" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>
